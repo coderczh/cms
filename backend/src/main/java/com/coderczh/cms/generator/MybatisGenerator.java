@@ -13,11 +13,11 @@ public class MybatisGenerator {
     private static final String PASSWORD = "080923";
     private static final String AUTHOR = "coderczh";
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final String ROOT_DIR = "/backend/src/main/java";
+    private static final String ROOT_DIR = "/src/main/java";
     private static final String BASE_DIR = "com.coderczh.cms";
-    private static final String MAPPER_DIR = "/backend/src/main/resources/mapper";
+    private static final String MAPPER_DIR = "/src/main/resources/mapper";
     private static final String USER_DIR = System.getProperty("user.dir");
-    private static final String TABLE_NAME = "tbl_account_verification";
+    private static final String TABLE_NAME = "tbl_user_role";
 
     public static void main(String[] args) {
         System.out.println("=======数据表生成中========");
