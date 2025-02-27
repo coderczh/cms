@@ -1,0 +1,20 @@
+server:
+  port: 2222
+  servlet:
+    context-path: /cms
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.137.8.130:3306/cms?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 080923
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  type-aliases-package: com.coderczh.cms.entity
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+logging:
+  config: classpath:logback.xml
