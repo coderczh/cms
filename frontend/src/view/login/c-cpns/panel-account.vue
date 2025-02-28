@@ -8,7 +8,7 @@
       status-icon
     >
       <el-form-item label="帐号" prop="account">
-        <el-input v-model="account.account" />
+        <el-input v-model="account.accountNo" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="account.password" show-password />
@@ -22,16 +22,16 @@ import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import useLoginStore from '@/store/login/login.ts'
 import type { FormRules, ElForm } from 'element-plus'
-import type { IAccount } from '@/type/index.d.ts'
+import type { IAccountInfo } from '@/type/index.d.ts'
 import { localCache } from '@/utils/cache'
 
-const account = reactive<IAccount>({
-  account: localCache.getCache('account') ?? '',
+const account = reactive<IAccountInfo>({
+  accountNo: localCache.getCache('account') ?? '',
   password: localCache.getCache('password') ?? ''
 })
 
 const accountRules: FormRules = {
-  account: [
+  accountNo: [
     {
       required: true,
       message: '账号不能为空',
@@ -65,15 +65,15 @@ function loginAction(isRemPwd: boolean) {
     if (valid) {
       loginStore
         .loginAccountAction({
-          account: account.account,
+          accountNo: account.accountNo,
           password: account.password
         })
         .then(() => {
           if (isRemPwd) {
-            localCache.setCache('account', JSON.stringify(account.account))
+            localCache.setCache('accountNo', JSON.stringify(account.accountNo))
             localCache.setCache('password', JSON.stringify(account.password))
           } else {
-            localCache.removeCache('account')
+            localCache.removeCache('accountNo')
             localCache.removeCache('password')
           }
         })

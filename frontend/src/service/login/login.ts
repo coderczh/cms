@@ -1,7 +1,7 @@
 import hyRequest from '..'
-import type { IAccount } from '@/type/index.d.ts'
+import type { IAccountInfo } from '@/type/index.d.ts'
 
-export function accountLogin(account: IAccount) {
+export function accountLogin(accountInfo: IAccountInfo) {
   return hyRequest.instance({
     url: '/login',
     method: 'POST',
@@ -9,7 +9,7 @@ export function accountLogin(account: IAccount) {
       'Content-Type': 'application/json'
     },
     data: {
-      loginInfo: account
+      account: accountInfo
     }
   })
 }

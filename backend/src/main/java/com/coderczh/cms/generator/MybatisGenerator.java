@@ -17,7 +17,7 @@ public class MybatisGenerator {
     private static final String BASE_DIR = "com.coderczh.cms";
     private static final String MAPPER_DIR = "/src/main/resources/mapper";
     private static final String USER_DIR = System.getProperty("user.dir");
-    private static final String TABLE_NAME = "tbl_user_role";
+    private static final String TABLE_NAME = "tbl_role_info";
 
     public static void main(String[] args) {
         System.out.println("=======数据表生成中========");

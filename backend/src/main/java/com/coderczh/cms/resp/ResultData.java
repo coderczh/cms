@@ -2,7 +2,6 @@ package com.coderczh.cms.resp;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.springframework.http.HttpStatus;
 
 /**
  * 账户端返回结果
@@ -17,6 +16,11 @@ public class ResultData<T> {
      * 返回码
      */
     private int code;
+
+    /**
+     * 返回描述
+     */
+    private String description;
 
     /**
      * 返回信息
@@ -43,7 +47,8 @@ public class ResultData<T> {
      */
     public static <T> ResultData<T> success(T message) {
         ResultData<T> resultData = new ResultData<>();
-        return resultData.setCode(HttpStatus.OK.value())
+        return resultData.setCode(ReturnCodeEnum.RC200.getCode())
+                .setDescription(ReturnCodeEnum.RC200.getDescription())
                 .setMessage(message);
     }
 
@@ -54,8 +59,8 @@ public class ResultData<T> {
      * @param <T>     数据类型
      * @return 失败的返回报文
      */
-    public static <T> ResultData<T> fail(int code) {
+    public static <T> ResultData<T> fail(int code, String description) {
         ResultData<T> resultData = new ResultData<>();
-        return resultData.setCode(code);
+        return resultData.setCode(code).setDescription(description);
     }
 }

@@ -1,4 +1,4 @@
-export interface IAccount {
-  account: string
+export interface IAccountInfo {
+  accountNo: string
   password: string
 }
