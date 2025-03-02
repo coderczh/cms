@@ -7,7 +7,7 @@
       ref="formRef"
       status-icon
     >
-      <el-form-item label="帐号" prop="account">
+      <el-form-item label="帐号" prop="accountNo">
         <el-input v-model="account.accountNo" />
       </el-form-item>
       <el-form-item label="密码" prop="password">

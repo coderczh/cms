@@ -26,7 +26,6 @@ const routes = createRouter({
 
 routes.beforeEach((to) => {
   const token = localCache.getCache(LOGIN_TOKEN)
-  console.log(token)
   if (to.path === '/main' && !token) {
     return '/login'
   }

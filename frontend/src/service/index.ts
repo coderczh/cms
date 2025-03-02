@@ -10,8 +10,8 @@ const hyRequest = new HYRequest({
   interceptors: {
     requestInterceptor: (config) => {
       const token = localCache.getCache(LOGIN_TOKEN)
+      config.headers.setContentType('application/json')
       if (config.headers && token) {
-        config.headers.setContentType('application/json;charset=utf-8')
         config.headers.setAuthorization(`coderczh_${token}`)
       }
       return config
