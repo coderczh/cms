@@ -3,7 +3,7 @@ package com.coderczh.cms.controller.login;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.coderczh.cms.dto.login.Account;
+import com.coderczh.cms.dto.login.UserInputDto;
 import com.coderczh.cms.dto.login.UserOutputDto;
 import com.coderczh.cms.entity.RoleInfo;
 import com.coderczh.cms.entity.UserInfo;
@@ -30,7 +30,7 @@ public class UserController {
     private UserRoleService userRoleService;
 
     @PostMapping("/login")
-    public ResultData<UserOutputDto> getUserInfo(@RequestBody Account userInputDto) {
+    public ResultData<UserOutputDto> getUserInfo(@RequestBody UserInputDto userInputDto) {
         if (ObjectUtil.isEmpty(userInputDto)) {
             return ResultData.fail(ReturnCodeEnum.PARAM_ERROR.getCode(), ReturnCodeEnum.PARAM_ERROR.getDescription());
         }

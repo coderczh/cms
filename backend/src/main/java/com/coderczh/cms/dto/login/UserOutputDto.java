@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class UserOutputDto {
-    public UserInfo userInfo;
-    public RoleInfo roleInfo;
-    public String token;
+    private UserInfo userInfo;
+    private RoleInfo roleInfo;
+    private String token;
 }
