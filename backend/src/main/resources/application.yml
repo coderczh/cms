@@ -8,6 +8,18 @@ spring:
     url: jdbc:mysql://43.137.8.130:3306/cms?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: 080923
+  data:
+    redis:
+      host: 43.137.8.130
+      port: 6379
+      password: 080923
+      timeout: 2000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+
 
 mybatis-plus:
   configuration:

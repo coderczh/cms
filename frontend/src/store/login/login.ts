@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { accountLogin, getMenuByRoleId } from '@/service/login/login.ts'
+import { accountLogin } from '@/service/login/login.ts'
 import type { IAccountInfo } from '@/type/index.d.ts'
 import { localCache } from '@/utils/cache'
 import routes from '@/router'
@@ -25,8 +25,6 @@ const useLoginStore = defineStore('login', {
       this.userInfo = message.userInfo
       this.roleInfo = message.roleInfo
       localCache.setCache(LOGIN_TOKEN, this.token)
-      const menuResult = await getMenuByRoleId(this.roleInfo.id)
-      console.log(menuResult)
       routes.push('/main')
     }
   }

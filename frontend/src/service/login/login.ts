@@ -8,10 +8,3 @@ export function accountLogin(accountInfo: IAccountInfo) {
     data: accountInfo
   })
 }
-
-export function getMenuByRoleId(id: number) {
-  return hyRequest.instance({
-    url: `/role/${id}/menu`,
-    method: 'GET'
-  })
-}
