@@ -3,7 +3,7 @@
     <div class="content">
       <div class="info">
         <el-dropdown>
-          <span class="el-dropdown-link">
+          <span class="user-info">
             <el-avatar
               size="default"
               src="https://p3-passport.byteacctimg.com/img/user-avatar/ab74aba27eb2cba2b1dbd5fdb840e7bb~70x70.awebp"
@@ -12,11 +12,18 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item disabled>Action 4</el-dropdown-item>
-              <el-dropdown-item divided>Action 5</el-dropdown-item>
+              <el-dropdown-item>
+                <el-icon><Close /></el-icon>
+                <span>退出登录</span>
+              </el-dropdown-item>
+              <el-dropdown-item divided>
+                <el-icon><InfoFilled /></el-icon>
+                <span>个人信息</span>
+              </el-dropdown-item>
+              <el-dropdown-item>
+                <el-icon><Unlock /></el-icon>
+                <span>修改密码</span>
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -41,5 +48,21 @@
     flex: 1;
     padding: 0 18px;
   }
+}
+
+.info {
+  .user-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .name {
+      margin-left: 5px;
+    }
+  }
+}
+
+.el-tooltip__trigger:focus-visible {
+  outline: unset !important;
 }
 </style>
