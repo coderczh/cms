@@ -12,7 +12,7 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>
+              <el-dropdown-item @click="logout">
                 <el-icon><Close /></el-icon>
                 <span>退出登录</span>
               </el-dropdown-item>
@@ -32,7 +32,17 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { LOGIN_TOKEN } from '@/global/constant'
+import { localCache } from '@/utils/cache'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+function logout() {
+  localCache.removeCache(LOGIN_TOKEN)
+  router.push('/login')
+}
+</script>
 
 <style lang="less" scoped>
 .header {
