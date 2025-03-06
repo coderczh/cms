@@ -13,7 +13,7 @@ interface ILoginState {
 
 const useLoginStore = defineStore('login', {
   state: (): ILoginState => ({
-    token: localCache.getCache(LOGIN_TOKEN) ?? '',
+    token: '',
     userInfo: {},
     roleInfo: {}
   }),
@@ -25,7 +25,37 @@ const useLoginStore = defineStore('login', {
       this.userInfo = message.userInfo
       this.roleInfo = message.roleInfo
       localCache.setCache(LOGIN_TOKEN, this.token)
+
+      // const files: Record<string, any> = import.meta.glob('@/router/*.ts', {
+      //   eager: true
+      // })
+      // for (const key in files) {
+      //   const module = files[key]
+      //   console.log(module.mainRouter)
+      //   routes.addRoute('/main', module.mainRouter[0].path)
+      // }
+
       routes.push('/main')
+    },
+
+    loadLocalCache() {
+      const token = localCache.getCache(LOGIN_TOKEN)
+      const userInfo = localCache.getCache('userInfo')
+      const roleInfo = localCache.getCache('userResource')
+      if (token && userInfo && roleInfo) {
+        this.token = token
+        this.userInfo = userInfo
+        this.roleInfo = roleInfo
+
+        // const files: Record<string, any> = import.meta.glob('@/router/*.ts', {
+        //   eager: true
+        // })
+        // for (const key in files) {
+        //   const module = files[key]
+        //   console.log(module.mainRouter)
+        //   routes.addRoute('/main', module.mainRouter[0].path)
+        // }
+      }
     }
   }
 })

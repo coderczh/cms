@@ -11,23 +11,23 @@ const hyRequest = new HYRequest({
     requestInterceptor: (config) => {
       const token = localCache.getCache(LOGIN_TOKEN)
       config.headers.setContentType('application/json')
-      if (config.headers && token) {
-        config.headers.setAuthorization(`coderczh_${token}`)
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`
       }
       return config
     }
-    //   requestInterceptorCatch: (err) => {
-    //     console.log('请求失败的拦截')
-    //     return err
-    //   },
-    //   responseInterceptor: (res) => {
-    //     console.log('请求成功的拦截')
-    //     return res
-    //   },
-    //   responseInterceptorCatch: (err) => {
-    //     console.log('响应成功的拦截')
-    //     return err
-    //   }
+    /*       requestInterceptorCatch: (err) => {
+        console.log('请求失败的拦截')
+        return err
+      },
+      responseInterceptor: (res) => {
+        console.log('请求成功的拦截')
+        return res
+      },
+      responseInterceptorCatch: (err) => {
+        console.log('响应成功的拦截')
+        return err
+      } */
   }
 })
 

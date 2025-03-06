@@ -8,6 +8,11 @@ spring:
     url: jdbc:mysql://43.137.8.130:3306/cms?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: 080923
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      max-lifetime: 1500000
   data:
     redis:
       host: 43.137.8.130

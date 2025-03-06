@@ -37,8 +37,8 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import PanelAccount from './panel-account.vue'
-import PanelPhone from './panel-phone.vue'
+import PanelAccount from './account/panel-account.vue'
+import PanelPhone from './phone/panel-phone.vue'
 import { localCache } from '@/utils/cache'
 
 const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)

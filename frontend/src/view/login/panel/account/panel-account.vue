@@ -26,7 +26,7 @@ import type { IAccountInfo } from '@/type/index.d.ts'
 import { localCache } from '@/utils/cache'
 
 const account = reactive<IAccountInfo>({
-  accountNo: localCache.getCache('account') ?? '',
+  accountNo: localCache.getCache('accountNo') ?? '',
   password: localCache.getCache('password') ?? ''
 })
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosRequestConfig } from 'axios'
+import type { AxiosInstance } from 'axios'
 import type { HYRequestInterceptors, HYRequestConfig } from './type.ts'
 
 class HYRequest {
@@ -19,12 +19,6 @@ class HYRequest {
       this.interceptors?.responseInterceptor,
       this.interceptors?.responseInterceptorCatch
     )
-  }
-
-  request(config: AxiosRequestConfig) {
-    this.instance.request(config).then((res) => {
-      console.log(res)
-    })
   }
 }
 

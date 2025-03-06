@@ -15,13 +15,7 @@ const routes = createRouter({
     },
     {
       path: '/main',
-      component: () => import('@/view/main/main.vue'),
-      children: [
-        {
-          path: '/main/test',
-          component: () => import('@/view/main/content/test/test.vue')
-        }
-      ]
+      component: () => import('@/view/main/main.vue')
     },
     {
       path: '/:pathMatch(.*)*',

@@ -10,6 +10,7 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 @SpringBootConfiguration
 public class CorsConfig {
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
@@ -19,6 +20,7 @@ public class CorsConfig {
         config.addAllowedMethod("*");   // 允许所有请求方法
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+        log.info("=== CORS初始化完成 ===");
         return new CorsFilter(source);
     }
 }
