@@ -6,7 +6,7 @@ import com.coderczh.cms.dao.RoleInfoDao;
 import com.coderczh.cms.dao.UserInfoDao;
 import com.coderczh.cms.dao.UserRoleDao;
 import com.coderczh.cms.dto.login.AccountInputDto;
-import com.coderczh.cms.dto.login.AccountOutputDto;
+import com.coderczh.cms.dto.login.LoginOutputDto;
 import com.coderczh.cms.entity.RoleInfo;
 import com.coderczh.cms.entity.UserInfo;
 import com.coderczh.cms.entity.UserRole;
@@ -30,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
     private RoleInfoDao roleInfoDao;
 
     @Override
-    public ResultData<AccountOutputDto> getLoginOutput(@Valid AccountInputDto accountInputDto) {
+    public ResultData<LoginOutputDto> getLoginOutput(@Valid AccountInputDto accountInputDto) {
         // 获取用户信息
         QueryWrapper<UserInfo> userWrapper = new QueryWrapper<>();
         userWrapper.eq("account_no", accountInputDto.getAccountNo())
@@ -58,9 +58,12 @@ public class LoginServiceImpl implements LoginService {
             return ResultData.fail(ReturnCodeEnum.USER_INFO_ERROR.getCode(),
                     ReturnCodeEnum.USER_INFO_ERROR.getDescription());
         }
+        return getResultData(userInfo, roleInfo);
+    }
 
-        AccountOutputDto accountOutputDto = new AccountOutputDto();
-        accountOutputDto.setUserInfo(userInfo).setRoleInfo(roleInfo).setToken(IdUtil.fastSimpleUUID());
-        return ResultData.success(accountOutputDto);
+    private ResultData<LoginOutputDto> getResultData(UserInfo userInfo, RoleInfo roleInfo) {
+        LoginOutputDto loginOutputDto = new LoginOutputDto();
+        loginOutputDto.setUserInfo(userInfo).setRoleInfo(roleInfo).setToken(IdUtil.fastSimpleUUID());
+        return ResultData.success(loginOutputDto);
     }
 }

@@ -33,13 +33,13 @@
 </template>
 
 <script lang="ts" setup>
-import { LOGIN_TOKEN } from '@/global/constant'
+import { TOKEN } from '@/global/constant'
 import { localCache } from '@/utils/cache'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 function logout() {
-  localCache.removeCache(LOGIN_TOKEN)
+  localCache.removeCache(TOKEN)
   router.push('/login')
 }
 </script>

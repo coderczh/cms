@@ -3,7 +3,7 @@ import { accountLogin } from '@/service/login/login.ts'
 import type { IAccountInfo } from '@/type/index.d.ts'
 import { localCache } from '@/utils/cache'
 import routes from '@/router'
-import { LOGIN_TOKEN } from '@/global/constant'
+import { TOKEN, USER_INFO, ROLE_INFO } from '@/global/constant.ts'
 
 interface ILoginState {
   token: string
@@ -18,13 +18,19 @@ const useLoginStore = defineStore('login', {
     roleInfo: {}
   }),
   actions: {
-    async loginAccountAction(accountInfo: IAccountInfo) {
+    async loginAccount(accountInfo: IAccountInfo) {
       const accountLoginResult = await accountLogin(accountInfo)
+      const code = accountLoginResult.data.code
+      if (code !== 200) {
+        return accountLoginResult.data.description
+      }
       const message = accountLoginResult.data.message
       this.token = message.token
       this.userInfo = message.userInfo
       this.roleInfo = message.roleInfo
-      localCache.setCache(LOGIN_TOKEN, this.token)
+      localCache.setCache(TOKEN, this.token)
+      localCache.setCache(USER_INFO, this.token)
+      localCache.setCache(ROLE_INFO, this.token)
 
       // const files: Record<string, any> = import.meta.glob('@/router/*.ts', {
       //   eager: true
@@ -38,10 +44,10 @@ const useLoginStore = defineStore('login', {
       routes.push('/main')
     },
 
-    loadLocalCache() {
-      const token = localCache.getCache(LOGIN_TOKEN)
-      const userInfo = localCache.getCache('userInfo')
-      const roleInfo = localCache.getCache('userResource')
+    loadLoginInfo() {
+      const token = localCache.getCache(TOKEN)
+      const userInfo = localCache.getCache(USER_INFO)
+      const roleInfo = localCache.getCache(ROLE_INFO)
       if (token && userInfo && roleInfo) {
         this.token = token
         this.userInfo = userInfo

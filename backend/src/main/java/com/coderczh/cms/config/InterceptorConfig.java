@@ -20,6 +20,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login")
+                .excludePathPatterns("/login/account")
+                .excludePathPatterns("/login/phone")
                 .excludePathPatterns("/favicon.ico")
                 .excludePathPatterns("/error");
         log.info("=== 拦截器初始化完成 ===");

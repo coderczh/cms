@@ -2,14 +2,14 @@
 import HYRequest from './request/index.ts'
 import { BASE_URL, TIME_OUT } from './config/index.ts'
 import { localCache } from '@/utils/cache.ts'
-import { LOGIN_TOKEN } from '@/global/constant.ts'
+import { TOKEN } from '@/global/constant.ts'
 
 const hyRequest = new HYRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      const token = localCache.getCache(LOGIN_TOKEN)
+      const token = localCache.getCache(TOKEN)
       config.headers.setContentType('application/json')
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`

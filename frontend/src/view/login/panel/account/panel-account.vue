@@ -64,25 +64,25 @@ function loginAction(isRemPwd: boolean) {
   formRef.value?.validate((valid) => {
     if (valid) {
       loginStore
-        .loginAccountAction({
+        .loginAccount({
           accountNo: account.accountNo,
           password: account.password
         })
-        .then(() => {
-          if (isRemPwd) {
-            localCache.setCache('accountNo', JSON.stringify(account.accountNo))
-            localCache.setCache('password', JSON.stringify(account.password))
+        .then((res) => {
+          if (res) {
+            ElMessage({
+              message: '帐号或密码错误',
+              type: 'error',
+              plain: true
+            })
+          } else if (isRemPwd) {
+            localCache.setCache('accountNo', account.accountNo)
+            localCache.setCache('password', account.password)
           } else {
             localCache.removeCache('accountNo')
             localCache.removeCache('password')
           }
         })
-    } else {
-      ElMessage({
-        message: '请输入正确的账号和密码',
-        type: 'error',
-        plain: true
-      })
     }
   })
 }

@@ -7,5 +7,5 @@ const pinia = createPinia()
 export default function registryStore(app: App<Element>) {
   app.use(pinia)
   const loginStore = useLoginStore()
-  loginStore.loadLocalCache()
+  loginStore.loadLoginInfo()
 }
