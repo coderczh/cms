@@ -14,6 +14,10 @@ const routes = createRouter({
       component: () => import('@/view/login/login.vue')
     },
     {
+      path: '/registry',
+      component: () => import('@/view/registry/registry.vue')
+    },
+    {
       path: '/main',
       component: () => import('@/view/main/main.vue')
     },

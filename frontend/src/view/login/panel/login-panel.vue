@@ -20,14 +20,14 @@
               <span>手机登录</span>
             </div>
           </template>
-          <panel-phone />
+          <panel-phone ref="phoneRef" />
         </el-tab-pane>
       </el-tabs>
     </div>
     <!-- 底部区域 -->
     <div class="controls" v-show="showFooter">
       <el-checkbox v-model="isRemPwd" label="记住密码" />
-      <el-link type="primary" @click="forgetPassword">忘记密码</el-link>
+      <el-link type="primary" @click="registry">注册</el-link>
     </div>
     <el-button class="login-btn" type="primary" size="large" @click="loginBtn"
       >立即登录</el-button
@@ -40,7 +40,7 @@ import { ref, watch } from 'vue'
 import PanelAccount from './account/panel-account.vue'
 import PanelPhone from './phone/panel-phone.vue'
 import { localCache } from '@/utils/cache'
-import { ElMessage } from 'element-plus'
+import routes from '@/router'
 
 const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
 watch(isRemPwd, (val) => {
@@ -49,18 +49,17 @@ watch(isRemPwd, (val) => {
 
 const activeName = ref('account')
 const accountRef = ref<InstanceType<typeof PanelAccount>>()
+const phoneRef = ref<InstanceType<typeof PanelPhone>>()
 function loginBtn() {
   if (activeName.value === 'account') {
     accountRef.value?.loginAction(isRemPwd.value)
+  } else {
+    phoneRef.value?.loginAction()
   }
 }
 
-function forgetPassword() {
-  ElMessage({
-    message: '请联系管理员，谢谢',
-    type: 'warning',
-    plain: true
-  })
+function registry() {
+  routes.push('/registry')
 }
 
 const showFooter = ref<boolean>(true)

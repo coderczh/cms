@@ -28,6 +28,8 @@ public enum ReturnCodeEnum {
      */
     USER_INFO_ERROR(1000, "用户信息错误"),
     ROLE_INFO_ERROR(1001, "角色信息错误"),
+    CAPTCHA_ERROR(1002, "验证码错误"),
+    USER_EXIST_ERROR(1003, "用户已存在"),
     ;
 
     /**

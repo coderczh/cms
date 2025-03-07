@@ -61,8 +61,8 @@ public class UserInfo implements Serializable {
     /**
      * 手机号
      */
-    @TableField("phone_num")
-    private String phoneNum;
+    @TableField("phone_no")
+    private String phoneNo;
 
     /**
      * 创建时间

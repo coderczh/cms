@@ -71,7 +71,7 @@ function loginAction(isRemPwd: boolean) {
         .then((res) => {
           if (res) {
             ElMessage({
-              message: '帐号或密码错误',
+              message: res,
               type: 'error',
               plain: true
             })

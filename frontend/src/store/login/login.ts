@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { accountLogin } from '@/service/login/login.ts'
-import type { IAccountInfo } from '@/type/index.d.ts'
+import { accountLogin, PhoneLogin } from '@/service/login/login.ts'
+import type { IAccountInfo, IPhoneInfo } from '@/type/index.d.ts'
 import { localCache } from '@/utils/cache'
 import routes from '@/router'
 import { TOKEN, USER_INFO, ROLE_INFO } from '@/global/constant.ts'
@@ -25,6 +25,32 @@ const useLoginStore = defineStore('login', {
         return accountLoginResult.data.description
       }
       const message = accountLoginResult.data.message
+      this.token = message.token
+      this.userInfo = message.userInfo
+      this.roleInfo = message.roleInfo
+      localCache.setCache(TOKEN, this.token)
+      localCache.setCache(USER_INFO, this.token)
+      localCache.setCache(ROLE_INFO, this.token)
+
+      // const files: Record<string, any> = import.meta.glob('@/router/*.ts', {
+      //   eager: true
+      // })
+      // for (const key in files) {
+      //   const module = files[key]
+      //   console.log(module.mainRouter)
+      //   routes.addRoute('/main', module.mainRouter[0].path)
+      // }
+
+      routes.push('/main')
+    },
+
+    async loginPhone(phoneInfo: IPhoneInfo) {
+      const phoneLoginResult = await PhoneLogin(phoneInfo)
+      const code = phoneLoginResult.data.code
+      if (code !== 200) {
+        return phoneLoginResult.data.description
+      }
+      const message = phoneLoginResult.data.message
       this.token = message.token
       this.userInfo = message.userInfo
       this.roleInfo = message.roleInfo
