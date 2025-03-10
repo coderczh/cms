@@ -11,13 +11,7 @@ const routes = createRouter({
     },
     {
       path: '/login',
-      component: () => import('@/view/login/login.vue'),
-      children: [
-        {
-          path: 'user',
-          component: () => import('../view/main/content/system/user/user.vue')
-        }
-      ]
+      component: () => import('@/view/login/login.vue')
     },
     {
       path: '/registry',
@@ -25,26 +19,26 @@ const routes = createRouter({
     },
     {
       path: '/main',
-      component: () => import('../view/main/main.vue')
-      // children: [
-      //   {
-      //     path: 'system/user',
-      //     component: () => import('../view/main/content/system/user/user.vue')
-      //   },
-      //   {
-      //     path: 'system/role',
-      //     component: () => import('../view/main/content/system/role/role.vue')
-      //   },
-      //   {
-      //     path: 'product/category',
-      //     component: () =>
-      //       import('../view/main/content/product/category/category.vue')
-      //   },
-      //   {
-      //     path: 'product/info',
-      //     component: () => import('../view/main/content/product/info/info.vue')
-      //   }
-      // ]
+      component: () => import('@/view/main/main.vue'),
+      children: [
+        {
+          path: 'system/user',
+          component: () => import('@/view/main/content/system/user/user.vue')
+        },
+        {
+          path: 'system/role',
+          component: () => import('@/view/main/content/system/role/role.vue')
+        },
+        {
+          path: 'product/category',
+          component: () =>
+            import('@/view/main/content/product/category/category.vue')
+        },
+        {
+          path: 'product/info',
+          component: () => import('@/view/main/content/product/info/info.vue')
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)*',

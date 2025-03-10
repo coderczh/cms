@@ -24,9 +24,9 @@ export function getLoginCaptcha(phoneNo: string) {
   })
 }
 
-export function getResourceInfo(roleId: string) {
-  return hyRequest.instance({
-    url: `login/resource/${roleId}`,
-    method: 'GET'
-  })
-}
+// export function getResourceInfo(roleId: string) {
+//   return hyRequest.instance({
+//     url: `login/resource/${roleId}`,
+//     method: 'GET'
+//   })
+// }

@@ -9,32 +9,62 @@
         text-color="#b7bdc3"
         active-text-color="#fff"
         background-color="#001529"
+        @select="getResource"
       >
-        <el-sub-menu index="1">
+        <el-sub-menu index="1" v-show="roleId === 1">
           <template #title>
-            <!-- <el-icon>
-              <component :is="item.icon.split('-icon-')[1]" />
-            </el-icon> -->
             <el-icon><Setting /></el-icon>
             <span>系统管理</span>
           </template>
-          <el-menu-item>用户管理</el-menu-item>
-          <el-menu-item>角色管理</el-menu-item>
+          <el-menu-item index="systemUser">用户管理</el-menu-item>
+          <el-menu-item index="systemRole">角色管理</el-menu-item>
         </el-sub-menu>
         <el-sub-menu index="2">
           <template #title>
             <el-icon><Goods /></el-icon>
             <span>商品中心</span>
           </template>
-          <el-menu-item>商品类别</el-menu-item>
-          <el-menu-item>商品信息</el-menu-item>
+          <el-menu-item index="productCategory">商品类别</el-menu-item>
+          <el-menu-item index="productInfo">商品信息</el-menu-item>
         </el-sub-menu>
       </el-menu>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { ROLE_INFO } from '@/global/constant'
+import routes from '@/router'
+import { localCache } from '@/utils/cache'
+
+const roleId = localCache.getCache(ROLE_INFO).id
+
+function getResource(index: string) {
+  const textMap: Record<string, string> = {
+    systemUser: '/main/system/user',
+    systemRole: '/main/system/role',
+    productCategory: '/main/product/category',
+    productInfo: '/main/product/info'
+  }
+  Object.entries(textMap).forEach(([key, value]) => {
+    if (index === key) {
+      routes.push(value)
+    }
+  })
+}
+
+// const getResource = (index: string, indexPath: string[]) => {
+//   console.log(index)
+
+//   const textMap: Record<string, string> = {
+//     systemUser: '用户管理',
+//     systemRole: '角色管理',
+//     productCategory: '用户管理',
+//     productInfo: '角色管理'
+//   }
+//   console.log('菜单文本:', textMap[index])
+// }
+</script>
 
 <style lang="less" scoped>
 .aside {
