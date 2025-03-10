@@ -23,3 +23,10 @@ export function getLoginCaptcha(phoneNo: string) {
     method: 'GET'
   })
 }
+
+export function getResourceInfo(roleId: string) {
+  return hyRequest.instance({
+    url: `login/resource/${roleId}`,
+    method: 'GET'
+  })
+}

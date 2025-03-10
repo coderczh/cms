@@ -1,5 +1,6 @@
 package com.coderczh.cms.controller;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.coderczh.cms.dto.login.*;
 import com.coderczh.cms.resp.ResultData;
 import com.coderczh.cms.service.LoginService;
@@ -26,5 +27,10 @@ public class LoginController {
     @GetMapping("/captcha/{phoneNo}")
     public ResultData<String> getCaptcha(@PathVariable("phoneNo") String phoneNo) {
         return loginService.getCaptcha(phoneNo);
+    }
+
+    @GetMapping("/resource/{roleId}")
+    public ResultData<JSONObject> getResource(@PathVariable("roleId") String roleId) {
+        return loginService.getResource(roleId);
     }
 }

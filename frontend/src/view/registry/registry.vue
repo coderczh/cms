@@ -36,6 +36,7 @@
 </template>
 
 <script lang="ts" setup>
+import routes from '@/router'
 import { registry } from '@/service/registry/registry'
 import type { IRegistryInfo } from '@/type/registry'
 import type { ElForm, FormRules } from 'element-plus'
@@ -92,7 +93,21 @@ function registryBtn() {
   formRef.value?.validate((valid) => {
     if (valid) {
       registry(registryInfo).then((res) => {
-        console.log(res)
+        const registryResult = res.data
+        if (registryResult.code !== 200) {
+          ElMessage({
+            message: registryResult.description,
+            type: 'error',
+            plain: true
+          })
+        } else {
+          ElMessage({
+            message: `${registryResult.description}, 请登录`,
+            type: 'success',
+            plain: true
+          })
+          routes.push('/login')
+        }
       })
     }
   })

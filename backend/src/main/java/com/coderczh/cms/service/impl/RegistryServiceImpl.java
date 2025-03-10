@@ -14,6 +14,8 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+
 @Service
 public class RegistryServiceImpl implements RegistryService {
 
@@ -28,10 +30,13 @@ public class RegistryServiceImpl implements RegistryService {
     @Transactional(rollbackFor = Exception.class)
     public ResultData<String> registry(RegistryInputDto registryInputDto) {
         UserInfo userInfo = Convert.convert(UserInfo.class, registryInputDto);
-        QueryWrapper<UserInfo> userWrapper = new QueryWrapper<>();
-        userWrapper.eq("account_no", userInfo.getAccountNo())
+        QueryWrapper<UserInfo> accountWrapper = new QueryWrapper<>();
+        accountWrapper.eq("account_no", userInfo.getAccountNo())
                 .eq("password", userInfo.getPassword());
-        if (userInfoDao.selectCount(userWrapper) == null) {
+        QueryWrapper<UserInfo> phoneWrapper = new QueryWrapper<>();
+        phoneWrapper.eq("phone_no", userInfo.getPhoneNo());
+        if (userInfoDao.selectCount(accountWrapper) == 0L && userInfoDao.selectCount(phoneWrapper) == 0) {
+            userInfo.setCreateDate(LocalDate.now());
             userInfoDao.insert(userInfo);
             UserRole userRole = new UserRole();
             userRole.setUserId(userInfo.getId()).setRoleId(1);

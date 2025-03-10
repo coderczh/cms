@@ -1,7 +1,9 @@
 package com.coderczh.cms.service.impl;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.coderczh.cms.common.util.RedisUtil;
 import com.coderczh.cms.dao.RoleInfoDao;
@@ -19,6 +21,9 @@ import com.coderczh.cms.service.LoginService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -102,6 +107,15 @@ public class LoginServiceImpl implements LoginService {
         String captcha = RandomUtil.randomNumbers(6);
         redisUtil.addValue(phoneNo, captcha, 60 * 1000);
         return ResultData.success(captcha);
+    }
+
+    @Override
+    public ResultData<JSONObject> getResource(String roleId) {
+        List<String> resourceList = Convert.toList(String.class, redisUtil.getList("role_" + roleId));
+        JSONObject resource = new JSONObject();
+        resource.put("roleId", roleId);
+        resource.put("resource", resourceList);
+        return ResultData.success(resource);
     }
 
     private UserRole getUserRoleInfo(Integer userId) {

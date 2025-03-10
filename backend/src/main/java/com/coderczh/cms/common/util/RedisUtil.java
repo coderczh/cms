@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -62,5 +63,13 @@ public class RedisUtil {
      */
     public Object getValue(String key) {
         return StrUtil.isBlank(key) ? Constant.DEFAULT_STRING : redisTemplate.opsForValue().get(key);
+    }
+
+    public void setList(String key, Object value) {
+        redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    public Object getList(String key) {
+        return StrUtil.isBlank(key) ? Collections.emptyList() : redisTemplate.opsForList().range(key, 0, -1);
     }
 }
